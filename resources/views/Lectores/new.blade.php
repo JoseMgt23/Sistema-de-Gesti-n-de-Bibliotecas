@@ -17,13 +17,13 @@
     @csrf
         <div class="mb-3">
         <label for="id_lector" class="form-label">Code</label>
-        <input type="text" class="form-control" id="id_lector" aria-describedby="idHelp" name="id"
+        <input type="text" class="form-control" id="id_lectores" aria-describedby="idHelp" name="id"
             disabled="disabled">
         <div id="idHelp" class="form-text">Lector Code </div>
   </div>
   <div class="mb-3">
-    <label for="name" class="form-label">Nombre</label>
-    <input type="text" required class="form-control" id="name" name="name" aria-describedby="nombreHelp"
+    <label for="nombre" class="form-label">Nombre</label>
+    <input type="text" required class="form-control" id="nombre" name="nombre" aria-describedby="nombreHelp"
     placeholder="Nombre Lector">
   </div>
   <div class="mb-3">

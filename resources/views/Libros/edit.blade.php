@@ -13,12 +13,12 @@
   <body>
     <div class="container">
     <h1>Editar Libro</h1>
-    <form method="POST" action="{{ route('libros.update', ['libro' => $libro->id_libro]) }}">
+    <form method="POST" action="{{ route('libros.update', ['libro' => $libro->id_libros]) }}">
         @method('put')
         @csrf
         <div class="mb-3">
         <label for="codigo" class="form-label">Código</label>
-            <input type="text" class="form-control" id="codigo" aria-describedby="codigoHelp" name="codigo" disabled="disabled" value="{{ $libro->id_libro }}">
+            <input type="text" class="form-control" id="codigo" aria-describedby="codigoHelp" name="codigo" disabled="disabled" value="{{ $libro->id_libros}}">
             <div id="codigoHelp" class="form-text">Código del libro</div>
         </div>
         <div class="mb-3">

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
+use App\Models\Prestamo;
 use Illuminate\Http\Request;
 
 class PrestamoController extends Controller
@@ -11,13 +12,13 @@ class PrestamoController extends Controller
      */
     public function index()
     {
-        $prestamos = DB::table('tb_prestamos')
-                    ->join('tb_lector', 'tb_prestamos.lector_id', '=', 'tb_lector.id')
-                    ->join('tb_libros', 'tb_prestamos.libro_id', '=', 'tb_libros.id')
-                    ->select('tb_prestamos.*', 'tb_lector.nombre', 'tb_libros.titulo')
+        $prestamos = DB::table('prestamos')
+                    ->join('lectores', 'prestamos.id_prestamos', '=', 'lectores.id_lectores')
+                    ->join('libros', 'prestamos.id_prestamos', '=', 'libros.id_libros')
+                    ->select('prestamos.*', 'lectores.nombre', 'libros.titulo')
                     ->get();
         
-        return view('prestamo.index', ['prestamos' => $prestamos]);
+        return view('prestamos.index', ['prestamos' => $prestamos]);
     }
 
     /**
@@ -25,14 +26,14 @@ class PrestamoController extends Controller
      */
     public function create()
     {
-        $libros = DB::table('tb_libros')
+        $libros = DB::table('libros')
             ->orderBy('titulo')
             ->get();
-        $lectores = DB::table('tb_lector')
+        $lectores = DB::table('lectores')
             ->orderBy('nombre')
             ->get();
             
-        return view ('prestamo.new', ['libros' => $libros, 'lectores' => $lectores]);
+        return view ('prestamos.new', ['libros' => $libros, 'lectores' => $lectores]);
     }
 
     /**
@@ -40,18 +41,18 @@ class PrestamoController extends Controller
      */
     public function store(Request $request)
     {
-        $prestamo = new Prestamo();
-        $prestamo->libro_id = $request->libro_id;
-        $prestamo->lector_id = $request->lector_id;
-        $prestamo->fecha_préstamo = $request->fecha_préstamo;
-        $prestamo->fecha_devolución = $request->fecha_devolución;
+        $prestamos = new Prestamo();
+        $prestamos->libro_id = $request->libro_id;
+        $prestamos->lector_id = $request->lector_id;
+        $prestamos->fecha_préstamo = $request->fecha_préstamo;
+        $prestamos->fecha_devolución = $request->fecha_devolución;
 
-        $prestamo->save();
+        $prestamos->save();
 
-        $prestamos = DB::table('tb_prestamos')
-                    ->join('tb_lector', 'tb_prestamos.lector_id', '=', 'tb_lector.id')
-                    ->join('tb_libros', 'tb_prestamos.libro_id', '=', 'tb_libros.id')
-                    ->select('tb_prestamos.*', 'tb_lector.nombre', 'tb_libros.titulo')
+        $prestamos = DB::table('prestamos')
+                    ->join('lectores', 'prestamos.id_prestamos', '=', 'lectores.id_lectores')
+                    ->join('libros', 'prestamos.id_prestamos', '=', 'libros.id_libros')
+                    ->select('prestamos.*', 'lector.nombre', 'libros.titulo')
                     ->get();
         
         return view('prestamo.index', ['prestamos' => $prestamos]);
@@ -71,14 +72,14 @@ class PrestamoController extends Controller
      */
     public function edit(string $id)
     {
-        $prestamo = Prestamo::find($id);
-        $lector = DB::table ('tb_lector')
+        $prestamos = Prestamo::find($id);
+        $lectores = DB::table ('lectores')
             ->orderBy('titulo')
             ->get();
-        $libro = BD::table('tb_libro')
+        $libros = BD::table('libros')
             ->orderBy('nombre')
             ->get();
-        return view('libro_edit', ['libro' => $libro, 'lectores' => $lectoress]);
+        return view('libros_edit', ['libros' => $libros, 'lectores' => $lectores]);
     }
 
     /**
@@ -86,21 +87,21 @@ class PrestamoController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $prestamo = Prestamo::find($id);
-        $prestamo->libro_id = $request->libro_id;
-        $prestamo->lector_id = $request->lector_id;
-        $prestamo->fecha_préstamo = $request->fecha_préstamo;
-        $prestamo->fecha_devolución = $request->fecha_devolución;
+        $prestamos = Prestamo::find($id);
+        $prestamos->libro_id = $request->libro_id;
+        $prestamos->lector_id = $request->lector_id;
+        $prestamos->fecha_préstamo = $request->fecha_préstamo;
+        $prestamos->fecha_devolución = $request->fecha_devolución;
 
-        $prestamo->save();
+        $prestamos->save();
 
-        $prestamos = DB::table('tb_prestamos')
-        ->join('tb_lector', 'tb_prestamos.lector_id', '=', 'tb_lector.id')
-        ->join('tb_libros', 'tb_prestamos.libro_id', '=', 'tb_libros.id')
-        ->select('tb_prestamos.*', 'tb_lector.nombre', 'tb_libros.titulo')
-        ->get();
-
-        return view('prestamo.index', ['prestamos' => $prestamos]);
+        $prestamos = DB::table('prestamos')
+                    ->join('lectores', 'prestamos.id_prestamos', '=', 'lectores.id_lectores')
+                    ->join('libros', 'prestamos.id_prestamos', '=', 'libros.id_libros')
+                    ->select('prestamos.*', 'lector.nombre', 'libros.titulo')
+                    ->get();
+        
+        return view('prestamos.index', ['prestamos' => $prestamos]);
 
     }
 
@@ -109,15 +110,15 @@ class PrestamoController extends Controller
      */
     public function destroy(string $id)
     {
-        $prestamo = Prestamo::find($id);
-        $prestamo->delete();
+        $prestamos = Prestamo::find($id);
+        $prestamos->delete();
 
-        $prestamos = DB::table('tb_prestamos')
-        ->join('tb_lector', 'tb_prestamos.lector_id', '=', 'tb_lector.id')
-        ->join('tb_libros', 'tb_prestamos.libro_id', '=', 'tb_libros.id')
-        ->select('tb_prestamos.*', 'tb_lector.nombre', 'tb_libros.titulo')
-        ->get();
-
-        return view('prestamo.index', ['prestamos' => $prestamos]);
+        $prestamos = DB::table('prestamos')
+                    ->join('lectores', 'prestamos.id_prestamos', '=', 'lectores.id_lectores')
+                    ->join('libros', 'prestamos.id_prestamos', '=', 'libros.id_libros')
+                    ->select('prestamos.*', 'lector.nombre', 'libros.titulo')
+                    ->get();
+        
+        return view('prestamos.index', ['prestamos' => $prestamos]);
     }
 }

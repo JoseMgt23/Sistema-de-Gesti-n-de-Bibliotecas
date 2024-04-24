@@ -13,14 +13,14 @@
   <body>
     <div class="container">
         <h1>Nuevo Préstamo</h1>
-        <form action="{{ route('prestamos.update', ['prestamo' => $prestamo->id_prestamo]) }}" method="POST">
+        <form action="{{ route('prestamos.update', ['prestamo' => $prestamos->id]) }}" method="POST">
         @method('PUT')
         @csrf
         <div class="mb-3">
                 <label for="libro_id" class="form-label">Libro</label>
                 <select class="form-control" id="id_libro" name="id_libro">
                     @foreach ($libros as $libro)
-                        <option value="{{ $libro->id_libro }}" {{ $prestamo->id_libro == $libro->id ? 'selected' : '' }}>{{ $libro->titulo }}</option>
+                        <option value="{{ $libro->id_libros }}" {{ $prestamo->id == $libro->id_libros ? 'selected' : '' }}>{{ $libro->titulo }}</option>
                     @endforeach
                 </select>
             </div>
@@ -28,7 +28,7 @@
                 <label for="lector_id" class="form-label">Lector</label>
                 <select class="form-control" id="id_lector" name="id_lector">
                     @foreach ($lectores as $lector)
-                        <option value="{{ $lector->id_lector }}" {{ $prestamo->id_lector == $lector->id ? 'selected' : '' }}>{{ $lector->nombre }} {{ $lector->apellido }}</option>
+                        <option value="{{ $lector->id_lectores }}" {{ $prestamos->id == $lector->id_lectores ? 'selected' : '' }}>{{ $lector->nombre }} {{ $lector->apellido }}</option>
                     @endforeach
                 </select>
             </div>

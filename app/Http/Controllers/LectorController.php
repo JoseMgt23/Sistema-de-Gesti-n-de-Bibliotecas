@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
+use App\Models\Lector;
+//use App\Models\Lector;
 
 use Illuminate\Http\Request;
 
@@ -11,11 +14,11 @@ class LectorController extends Controller
      */
     public function index()
     {
-        $lector = DB::table('tb_lector')
-            ->join('tb_libro', 'tb_lector.id_libro', '=', 'tb_libro.id_libro')
-            ->select('tb_lector.*', 'tb_libro.titulo')
+        $lectores = DB::table('lectores')
+            ->join('libros', 'lectores.id_lectores', '=', 'libros.id_libros')
+            ->select('lectores.*', 'libros.titulo')
             ->get();
-        return view('lector.index', ['lectores' => $lector]);
+        return view('lectores.index', ['lectores' => $lectores]);
     }
 
     /**
@@ -23,10 +26,10 @@ class LectorController extends Controller
      */
     public function create()
     {
-        $lector = DB::table('tb_lector')
-            ->orderBy('nombre')
+        $lector = DB::table('lectores')
+            ->orderBy('id_lectores')
             ->get();
-        return view ('lector.new', ['lectores' => $lector]);
+        return view ('lectores.new', ['lectores' => $lector]);
     }
 
     /**
@@ -43,11 +46,11 @@ class LectorController extends Controller
 
         $lector->save();
 
-        $lector = DB::table('tb_lector')
-        ->join('tb_libro', 'tb_lector.id_libro', '=', 'tb_libro.id_libro')
-        ->select('tb_lector.*', 'tb_libro.titulo')
-        ->get();
-    return view('lector.index', ['lectores' => $lector]);       
+        $lectores = DB::table('lectores')
+            ->join('libros', 'lectores.id_lectores', '=', 'libros.id_libros')
+            ->select('lectores.*', 'libros.titulo')
+            ->get();
+        return view('lectores.index', ['lectores' => $lectores]);
 
     }
 
@@ -65,10 +68,10 @@ class LectorController extends Controller
     public function edit(string $id)
     {
         $lector = Lector::find($id);
-        $libros = DB::table ('tb_libro')
+        $libros = DB::table ('libros')
             ->orderBy('nombre')
             ->get();
-        return view('lector_edit', ['lector' => $lector, 'libros' => $libros]);
+        return view('lectores_edit', ['lectores' => $lector, 'libros' => $libros]);
     }
 
     /**
@@ -85,12 +88,11 @@ class LectorController extends Controller
 
         $lector->save();
 
-        $lector = DB::table('tb_lector')
-        ->join('tb_libro', 'tb_lector.id_libro', '=', 'tb_libro.id_libro')
-        ->select('tb_lector.*', 'tb_libro.titulo')
-        ->get();
-
-    return view('lector.index', ['lectores' => $lector]);   
+        $lector = DB::table('lectores')
+            ->join('libros', 'lectores.id_lectores', '=', 'libros.id_libros')
+            ->select('lectores.*', 'libros.titulo')
+            ->get();
+        return view('lectores.index', ['lectores' => $lector]);
     }
 
     /**
@@ -101,11 +103,10 @@ class LectorController extends Controller
         $lector = Lector::find($id);
         $lector->delete();
 
-        $lector = DB::table('tb_lector')
-        ->join('tb_libro', 'tb_lector.id_libro', '=', 'tb_libro.id_libro')
-        ->select('tb_lector.*', 'tb_libro.titulo')
-        ->get();
-
-    return view('lector.index', ['lectores' => $lector]);  
+        $lectores = DB::table('lectores')
+            ->join('libros', 'lectores.id_lectores', '=', 'libros.id_libros')
+            ->select('lectores.*', 'libros.titulo')
+            ->get();
+        return view('lectores.index', ['lectores' => $lectores]);
     }
 }

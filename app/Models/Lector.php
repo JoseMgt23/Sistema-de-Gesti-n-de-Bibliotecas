@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Lector extends Model
 {
     use HasFactory;
-    protected $table = 'tb_lector';
-    protected $primaryKey = 'id_lector';
-    protected $timestamps = false;
+
+    protected $table = 'lectores';
+    protected $primaryKey = 'id_lectores';
+    public $timestamps = false; // Cambia el nivel de acceso a public
 
     protected $fillable = [
         'nombre', 'apellido', 'direccion', 'telefono', 'email'
     ];
 
-    public function lectores(){
+    public function prestamos(){
         return $this->hasMany(Prestamo::class);
     }
 }

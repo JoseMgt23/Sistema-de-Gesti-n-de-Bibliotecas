@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('prestamos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('libro_id');
-            $table->unsignedBigInteger('lector_id');
+            $table->unsignedBigInteger('id_libros');
+            $table->unsignedBigInteger('id_lectores');
             $table->foreign('libro_id')->references('id')->on('libros')->onDelete('cascade');
             $table->foreign('lector_id')->references('id')->on('lectores')->onDelete('cascade');
             $table->date('fecha_prestamo');

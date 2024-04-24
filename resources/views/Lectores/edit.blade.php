@@ -13,13 +13,13 @@
   <body>
     <div class="container">
     <h1>Editar Lector</h1>
-    <form method="POST" action="{{route('lectores.update', ['lector' => $lector->id_lector])}}">
+    <form method="POST" action="{{route('lectores.update', ['lector' => $lector->id_lectores])}}">
     @method('put')
     @csrf
         <div class="mb-3">
         <label for="codigo" class="form-label">Id</label>
         <input type="text" class="form-control" id="id" aria-describedby="idHelp" name="id"
-            disabled="disabled" value="{{ $lector->id_lector}}">
+            disabled="disabled" value="{{ $lector->id}}">
         <div id="idHelp" class="form-text">Lector Code</div>
   </div>
   <div class="mb-3">

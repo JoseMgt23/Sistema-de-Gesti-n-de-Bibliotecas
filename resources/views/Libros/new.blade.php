@@ -17,7 +17,7 @@
         @csrf
         <div class="mb-3">
             <label for="id_libro" class="form-label">Código</label>
-            <input type="text" class="form-control" id="id" aria-describedby="idHelp" name="id_libro" disabled="disabled">
+            <input type="text" class="form-control" id="id" aria-describedby="idHelp" name="id" disabled="disabled">
             <div id="idHelp" class="form-text">Código del libro</div>
         </div>
         <div class="mb-3">
