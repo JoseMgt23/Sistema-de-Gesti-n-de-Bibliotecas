@@ -12,11 +12,11 @@ class LibroController extends Controller
      */
     public function index()
     {
-        $libro = DB::table('libros')
+        $libros = DB::table('libros')
             ->join('lectores', 'libros.id_libros', '=', 'lectores.id_lectores')
             ->select('libros.*', 'lectores.nombre')
             ->get();
-        return view('libros.index', ['libros' => $libro]);
+        return view('libros.index', ['libros' => $libros]);
     }
 
     /**
@@ -44,11 +44,11 @@ class LibroController extends Controller
 
         $libro->save();
 
-        $libro = DB::table('libros')
+        $libros = DB::table('libros')
         ->join('lectores', 'libros.id_libros', '=', 'lectores.id_lectores')
         ->select('libros.*', 'lectores.nombre')
         ->get();
-    return view('libros.index', ['libros' => $libro]);
+    return view('libros.index', ['libros' => $libros]);
 
     }
 
@@ -86,11 +86,11 @@ class LibroController extends Controller
 
         $libro->save();
 
-        $libro = DB::table('libros')
-            ->join('lectores', 'libros.id_libros', '=', 'lectores.id_lectores')
-            ->select('libros.*', 'lectores.nombre')
-            ->get();
-        return view('libros.index', ['libros' => $libro]);
+        $libros = DB::table('libros')
+        ->join('lectores', 'libros.id_libros', '=', 'lectores.id_lectores')
+        ->select('libros.*', 'lectores.nombre')
+        ->get();
+    return view('libros.index', ['libros' => $libros]);
     }
 
     /**
@@ -101,10 +101,10 @@ class LibroController extends Controller
         $libro = Libro::find($id);
         $libro->delete();
 
-        $libro = DB::table('libros')
-            ->join('lectores', 'libros.id_libros', '=', 'lectores.id_lectores')
-            ->select('libros.*', 'lectores.nombre')
-            ->get();
-        return view('libros.index', ['libros' => $libro]);
+        $libros = DB::table('libros')
+        ->join('lectores', 'libros.id_libros', '=', 'lectores.id_lectores')
+        ->select('libros.*', 'lectores.nombre')
+        ->get();
+    return view('libros.index', ['libros' => $libros]);
     }
 }

@@ -42,8 +42,8 @@ class PrestamoController extends Controller
     public function store(Request $request)
     {
         $prestamos = new Prestamo();
-        $prestamos->libro_id = $request->libro_id;
-        $prestamos->lector_id = $request->lector_id;
+        $prestamos->id_libros = $request->id_libros;
+        $prestamos->id_lectoes = $request->id_lectores;
         $prestamos->fecha_préstamo = $request->fecha_préstamo;
         $prestamos->fecha_devolución = $request->fecha_devolución;
 
@@ -88,8 +88,8 @@ class PrestamoController extends Controller
     public function update(Request $request, string $id)
     {
         $prestamos = Prestamo::find($id);
-        $prestamos->libro_id = $request->libro_id;
-        $prestamos->lector_id = $request->lector_id;
+        $prestamos->id_libros = $request->id_libros;
+        $prestamos->id_lectores = $request->id_lectores;
         $prestamos->fecha_préstamo = $request->fecha_préstamo;
         $prestamos->fecha_devolución = $request->fecha_devolución;
 

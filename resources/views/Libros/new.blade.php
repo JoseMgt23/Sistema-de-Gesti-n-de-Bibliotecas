@@ -16,8 +16,8 @@
     <form method="POST" action="{{ route('libros.store') }}">
         @csrf
         <div class="mb-3">
-            <label for="id_libro" class="form-label">Código</label>
-            <input type="text" class="form-control" id="id" aria-describedby="idHelp" name="id" disabled="disabled">
+            <label for="id_libros" class="form-label">Código</label>
+            <input type="text" class="form-control" id="id_libros" aria-describedby="idHelp" name="id_libros" disabled="disabled">
             <div id="idHelp" class="form-text">Código del libro</div>
         </div>
         <div class="mb-3">
@@ -31,13 +31,18 @@
             placeholder="Autor del libro">
         </div>
         <div class="mb-3">
-        <label for="genero" class="form-label">Género</label>
-            <input type="text" required class="form-control" id="genero" name="genero" aria-describedby="generoHelp" 
-            placeholder="Género del libro">
+        <label for="isbn" class="form-label">ISBN</label>
+        <input type="text" required class="form-control" id="isbn" name="isbn" aria-describedby="isbnHelp" 
+           placeholder="ISBN del libro">
         </div>
         <div class="mb-3">
             <label for="ano_publicacion" class="form-label">Año de Publicación</label>
             <input type="number" required class="form-control" id="ano_publicacion" name="ano_publicacion" aria-describedby="ano_publicacionHelp" placeholder="Año de publicación del libro">
+        </div>
+        <div class="mb-3">
+        <label for="editorial" class="form-label">Editorial</label>
+        <input type="text" required class="form-control" id="editorial" name="editorial" aria-describedby="editorialHelp" 
+           placeholder="Editorial del libro">
         </div>
         <div class="mb-3">
         <button type="submit" class="btn btn-primary">Save</button>

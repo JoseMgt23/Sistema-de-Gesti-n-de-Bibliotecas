@@ -37,6 +37,11 @@
         placeholder="Direccion Lector">
   </div>
   <div class="mb-3">
+    <label for="telefono" class="form-label">Teléfono</label>
+    <input type="text" required class="form-control" id="telefono" name="telefono" aria-describedby="telefonoHelp"
+        placeholder="Teléfono Lector">
+</div>
+  <div class="mb-3">
     <label for="email" class="form-label">Email</label>
     <input type="text" required class="form-control" id="email" name="email" aria-describedby="emailHelp"
     placeholder="Email Lector">

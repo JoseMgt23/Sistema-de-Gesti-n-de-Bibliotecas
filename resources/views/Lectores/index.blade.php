@@ -38,6 +38,9 @@
     <th scope="row">{{ $lector->id_lectores }}</th>
     <td>{{ $lector->nombre }}</td>
     <td>{{ $lector->apellido }}</td>
+    <td>{{ $lector->direccion }}</td>
+    <td>{{ $lector->telefono }}</td>
+    <td>{{ $lector->email }}</td>
     <td>
         <a href="{{ route('lectores.edit', ['lector' => $lector->id_lectores]) }}"
             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

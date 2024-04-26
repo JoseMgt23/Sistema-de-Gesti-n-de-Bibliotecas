@@ -27,7 +27,7 @@
                 <label for="id_lector" class="form-label">Lector</label>
                 <select class="form-control" id="id_lector" name="id_lector">
                     @foreach ($lectores as $lector)
-                        <option value="{{ $lector->id }}">{{ $lector->nombre }} {{ $lector->apellido }}</option>
+                        <option value="{{ $lector->id_lectores }}">{{ $lector->nombre }} {{ $lector->apellido }}</option>
                     @endforeach
                 </select>
             </div>
